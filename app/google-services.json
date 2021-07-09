@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "283038664999",
+    "firebase_url": "https://race-logger.firebaseio.com",
+    "project_id": "race-logger",
+    "storage_bucket": "race-logger.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:283038664999:android:3dbbd4b0a231a11bb08102",
+        "android_client_info": {
+          "package_name": "com.technerds.racelogger"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "283038664999-o5fuvv56ac78qnm94htaj62krjuk5sr8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaqcUOwfBkZbjG4RQctr7pTGmqdrHSzmw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "283038664999-o5fuvv56ac78qnm94htaj62krjuk5sr8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

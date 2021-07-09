@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/home_bg"
+    tools:context=".ui.HomeActivity">
+
+    <FrameLayout
+        android:id="@+id/fragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottomNavBar"
+        >
+
+
+    </FrameLayout>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/bottomNavBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="0dp"
+        android:layout_alignParentBottom="true"
+        app:cardBackgroundColor="@color/black_nav"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:onClick="HomeClicked"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imageViewHome"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@mipmap/home"
+                    />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/textViewHome"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:fontFamily="@font/helvetica"
+                    android:text="Home"
+                    android:textSize="12sp"
+                    android:textColor="@color/home_text_color"
+                    />
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:onClick="RaceClicked"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imageViewRace"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@mipmap/race"
+                    />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/textViewRace"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/helvetica"
+                    android:text="Race"
+                    android:textColor="@color/home_text_color"
+                    />
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:onClick="RunClicked"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imageViewRun"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@mipmap/run"
+                    />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/textViewRun"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/helvetica"
+                    android:text="Run"
+                    android:textColor="@color/home_text_color"
+                    />
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:onClick="AnalyzeClicked"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imageViewAnalyze"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@mipmap/analyze"
+                    />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/textViewAnalyze"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/helvetica"
+                    android:text="Analyze"
+                    android:textColor="@color/home_text_color"
+
+                    />
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:onClick="SettingsClicked"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imageViewAccount"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@mipmap/account"
+                    />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/textViewAccount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/helvetica"
+                    android:text="Account"
+                    android:textColor="@color/home_text_color"
+                    />
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</RelativeLayout>

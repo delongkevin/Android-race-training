@@ -1,0 +1,110 @@
+{
+  "status": 1,
+  "message": "User Race Data here",
+  "data": {
+    "id": 4,
+    "hour": "0",
+    "minute": "40",
+    "second": "50",
+    "finish_place": "5",
+    "finish_group_place": "1",
+    "age_group": "5",
+    "age_group_runner": "20",
+    "date": "2020-11-05 20:24:00",
+    "user_id": "1",
+    "race_id": "1",
+    "created_at": "2020-11-06T13:57:26.000000Z",
+    "updated_at": "2020-11-06T15:25:05.000000Z",
+    "notes": "asfasf",
+    "user_shoe": {
+      "id": 4,
+      "user_race_id": "4",
+      "shoes_profile_id": "4",
+      "created_at": "2020-11-06T13:57:26.000000Z",
+      "updated_at": "2020-11-06T15:25:05.000000Z",
+      "shoe_profile": {
+        "id": 4,
+        "shoe_name": "Brooks",
+        "model": "Bk01",
+        "size": "44",
+        "width": "4",
+        "cost": null,
+        "date_purchased": "2020-11-03",
+        "comfort_rating": "4",
+        "rating": null,
+        "user_id": "1",
+        "status": "1",
+        "created_at": "2020-11-06T15:15:47.000000Z",
+        "updated_at": "2020-11-06T15:15:47.000000Z",
+        "shoe_profile": "Shani test 1",
+        "shoe_mileage": []
+      }
+    },
+    "user_gallery": [
+      {
+        "id": 3,
+        "image": "1604671041-Luban_1604671038603.jpg",
+        "url": null,
+        "user_race_id": "4",
+        "created_at": "2020-11-06T13:57:26.000000Z",
+        "updated_at": "2020-11-06T13:57:26.000000Z"
+      }
+    ],
+    "race": {
+      "id": 1,
+      "race_name": "F1",
+      "park_name": "Melbourne Grounds",
+      "street_address": "11 Street Melbourne Grounds near Downtown Brooklyn",
+      "city": "Bentonville",
+      "country": "United States",
+      "state": "Arkansas",
+      "zip_code": "54600",
+      "distance": 13.05,
+      "unit": "Km",
+      "course_type": "Wet Outfield",
+      "temperature": "Nice (55-69)",
+      "temperature_unit": "C",
+      "weather": "Beautiful",
+      "total_runners": "100",
+      "male_runners": "100",
+      "female_runners": "200",
+      "created_at": "2020-11-06T07:56:20.000000Z",
+      "updated_at": "2020-11-06T15:25:05.000000Z",
+      "user_distance": "21",
+      "enjoyment_rating": {
+        "id": 1,
+        "rating": "5",
+        "user_id": "1",
+        "race_id": "1",
+        "created_at": "2020-11-06T07:56:20.000000Z",
+        "updated_at": "2020-11-06T15:25:05.000000Z"
+      },
+      "toughness_rating": {
+        "id": 1,
+        "rating": "5",
+        "user_id": "1",
+        "race_id": "1",
+        "created_at": "2020-11-06T07:56:20.000000Z",
+        "updated_at": "2020-11-06T13:57:26.000000Z"
+      },
+      "feel_meter_rating": {
+        "id": 1,
+        "rating": "5",
+        "user_id": "1",
+        "race_id": "1",
+        "created_at": "2020-11-06T07:56:20.000000Z",
+        "updated_at": "2020-11-06T14:17:27.000000Z"
+      },
+      "race_terrain": [
+        {
+          "id": 14,
+          "name": "Rolling Hills",
+          "race_id": "1",
+          "created_at": "2020-11-06T15:25:05.000000Z",
+          "updated_at": "2020-11-06T15:25:05.000000Z"
+        }
+      ]
+    }
+  },
+  "error": ""
+}

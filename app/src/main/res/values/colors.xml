@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#C0ED0A</color>
+    <color name="colorPrimaryDark">#12BC2B</color>
+    <color name="colorAccent">#C0ED0A</color>
+    <color name="black">#000000</color>
+    <color name="black_nav">#080808</color>
+    <color name="white">#FFFFFF</color>
+    <color name="stock_red">#b71c1c</color>
+    <color name="stock_green">#1bf062</color>
+    <color name="bg_opac">#aa737373</color>
+    <color name="home_text_color">#c8c8c8</color>
+    <color name="white_opac_nine">#17ffffff</color>
+    <color name="white_opac_twenty">#33ffffff</color>
+    <color name="white_opac_thirty">#4Dffffff</color>
+    <color name="blue_opac_thirty">#4D2962FF</color>
+    <color name="red_opac_thirty">#4DD50000</color>
+    <color name="green_opac_thirty">#4D66BB6A</color>
+    <color name="purple_opac_thirty">#4DE040FB</color>
+    <color name="cyan_opac_thirty">#4D84FFFF</color>
+    <color name="yellow_opac_thirty">#4DFFD600</color>
+    <color name="brown_opac_thirty">#4D8D6E63</color>
+    <color name="pink_opac_thirty">#4Dffccff</color>
+    <color name="orange_opac_thirty">#4Dffcc80</color>
+    <color name="dull_blue_opac_thirty">#4D666699</color>
+    <color name="lime_green">#00e03a</color>
+    <color name="orange">#e8ad1e</color>
+    <color name="leafy_green">#c0ed0a</color>
+    <color name="text_hint_grey">#787878</color>
+    <color name="bg_black">#080806</color>
+
+</resources>

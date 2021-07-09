@@ -1,0 +1,719 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:padding="10dp">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/textViewTitle"
+            style="@style/TextAppearance.AppCompat.Subhead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/helvetica"
+            android:padding="5dp"
+            android:text="Race List"
+            android:textColor="@color/colorPrimary" />
+
+
+        <ImageView
+            android:id="@+id/imageViewFilter"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:padding="3dp"
+            android:src="@mipmap/filter" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/imageViewFilter">
+
+            <com.tsuryo.swipeablerv.SwipeableRecyclerView
+                android:id="@+id/recycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:rightBgColor="@color/stock_red"
+                app:rightText="Delete"
+                app:textColor="@android:color/white"
+                app:textSize="20sp"
+                tools:listitem="@layout/item_race" />
+
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/floatingButtonAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="30dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:src="@drawable/add" />
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layoutFilter"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:background="@color/bg_opac">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_margin="5dp"
+            android:elevation="5dp"
+            app:cardBackgroundColor="@color/bg_black">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="right"
+                    >
+                    <ImageView
+                        android:id="@+id/imageViewClosePopup"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/cross"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="5dp"
+                            android:text="Race Name"
+                            android:textColor="@color/home_text_color" />
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cardViewRaceName"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_margin="5dp"
+                            app:cardBackgroundColor="@color/white_opac_nine"
+                            app:strokeColor="@color/colorPrimary"
+                            app:strokeWidth="0.5dp">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:padding="5dp">
+
+
+                                <com.jaredrummler.materialspinner.MaterialSpinner
+                                    android:id="@+id/spinnerRaceName"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:backgroundTint="@android:color/transparent"
+                                    android:fontFamily="@font/helvetica_ce_oblique"
+                                    android:gravity="center_vertical"
+                                    android:maxLines="1"
+                                    
+                                    android:paddingLeft="5dp"
+                                    android:paddingRight="5dp"
+                                    android:textColor="@color/home_text_color"
+                                    android:textColorHint="@color/text_hint_grey"
+                                    android:textSize="14sp"
+                                    android:hint="Race Name"
+                                    app:ms_arrow_tint="@color/colorPrimary"
+                                    app:ms_padding_bottom="7dp"
+                                    app:ms_padding_left="0dp"
+                                    app:ms_padding_right="0dp"
+                                    app:ms_popup_padding_top="0dp" />
+                                
+
+
+                            </RelativeLayout>
+
+
+                        </com.google.android.material.card.MaterialCardView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="5dp"
+                            android:text="Park Name"
+                            android:textColor="@color/home_text_color" />
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cardViewParkName"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_margin="5dp"
+                            app:cardBackgroundColor="@color/white_opac_nine"
+                            app:strokeColor="@color/colorPrimary"
+                            app:strokeWidth="0.5dp">
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:padding="5dp">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/editTextParkName"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="3"
+                                    android:background="@android:color/transparent"
+                                    android:fontFamily="@font/helvetica_ce_oblique"
+                                    android:gravity="center_vertical"
+                                    android:hint="Park Name"
+                                    android:maxLines="1"
+                                    android:paddingLeft="5dp"
+                                    android:paddingRight="5dp"
+                                    android:singleLine="true"
+                                    android:textColor="@color/home_text_color"
+                                    android:textColorHint="@color/text_hint_grey"
+                                    android:textSize="14sp" />
+
+
+                            </LinearLayout>
+
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="5dp"
+                            android:text="@string/country"
+                            android:textColor="@color/home_text_color" />
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cardViewCountry"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_margin="5dp"
+                            app:cardBackgroundColor="@color/white_opac_nine"
+                            app:strokeColor="@color/colorPrimary"
+                            app:strokeWidth="0.5dp">
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:padding="5dp">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/editTextCountry"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@android:color/transparent"
+                                    android:fontFamily="@font/helvetica_ce_oblique"
+                                    android:gravity="center_vertical"
+                                    android:hint="@string/country"
+                                    android:maxLines="1"
+                                    android:paddingLeft="5dp"
+                                    android:paddingRight="5dp"
+                                    android:singleLine="true"
+                                    android:textColor="@color/home_text_color"
+                                    android:textColorHint="@color/text_hint_grey"
+                                    android:textSize="14sp" />
+
+
+                            </LinearLayout>
+
+
+                        </com.google.android.material.card.MaterialCardView>
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="5dp"
+                            android:text="@string/state"
+                            android:textColor="@color/home_text_color" />
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cardViewState"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_margin="5dp"
+                            app:cardBackgroundColor="@color/white_opac_nine"
+                            app:strokeColor="@color/colorPrimary"
+                            app:strokeWidth="0.5dp">
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:padding="5dp">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/editTextState"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@android:color/transparent"
+                                    android:fontFamily="@font/helvetica_ce_oblique"
+                                    android:gravity="center_vertical"
+                                    android:hint="@string/state"
+                                    android:maxLines="1"
+                                    android:paddingLeft="5dp"
+                                    android:paddingRight="5dp"
+                                    android:singleLine="true"
+                                    android:textColor="@color/home_text_color"
+                                    android:textColorHint="@color/text_hint_grey"
+                                    android:textSize="14sp" />
+
+
+                            </LinearLayout>
+
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="5dp"
+                            android:text="@string/zip_postal_code"
+                            android:textColor="@color/home_text_color" />
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cardViewZipCode"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_margin="5dp"
+                            app:cardBackgroundColor="@color/white_opac_nine"
+                            app:strokeColor="@color/colorPrimary"
+                            app:strokeWidth="0.5dp">
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:padding="5dp">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/editTextZipCode"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@android:color/transparent"
+                                    android:fontFamily="@font/helvetica_ce_oblique"
+                                    android:gravity="center_vertical"
+                                    android:hint="@string/zip_postal_code"
+                                    android:maxLines="1"
+                                    android:paddingLeft="5dp"
+                                    android:paddingRight="5dp"
+                                    android:singleLine="true"
+                                    android:textColor="@color/home_text_color"
+                                    android:textColorHint="@color/text_hint_grey"
+                                    android:textSize="14sp" />
+
+
+                            </LinearLayout>
+
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="5dp"
+                            android:text="@string/city"
+                            android:textColor="@color/home_text_color" />
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cardViewCity"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_margin="5dp"
+                            app:cardBackgroundColor="@color/white_opac_nine"
+                            app:strokeColor="@color/colorPrimary"
+                            app:strokeWidth="0.5dp">
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:padding="5dp">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/editTextCity"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@android:color/transparent"
+                                    android:fontFamily="@font/helvetica_ce_oblique"
+                                    android:gravity="center_vertical"
+                                    android:hint="@string/city"
+                                    android:maxLines="1"
+                                    android:paddingLeft="5dp"
+                                    android:paddingRight="5dp"
+                                    android:singleLine="true"
+                                    android:textColor="@color/home_text_color"
+                                    android:textColorHint="@color/text_hint_grey"
+                                    android:textSize="14sp" />
+
+
+                            </LinearLayout>
+
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="5dp"
+                            android:text="Date"
+                            android:textColor="@color/home_text_color" />
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cardViewDateTime"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_margin="5dp"
+                            app:cardBackgroundColor="@color/white_opac_nine"
+                            app:strokeColor="@color/colorPrimary"
+                            app:strokeWidth="0.5dp">
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:padding="5dp">
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/textViewDateTime"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@android:color/transparent"
+                                    android:fontFamily="@font/helvetica_ce_oblique"
+                                    android:gravity="center_vertical"
+                                    android:hint="Date"
+                                    android:maxLines="1"
+                                    android:paddingLeft="5dp"
+                                    android:paddingRight="5dp"
+                                    android:textColor="@color/home_text_color"
+                                    android:textColorHint="@color/text_hint_grey"
+                                    android:textSize="14sp" />
+
+
+                            </LinearLayout>
+
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="5dp"
+                            android:text="@string/distance"
+                            android:textColor="@color/home_text_color" />
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cardViewDistance"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_margin="5dp"
+                            app:cardBackgroundColor="@color/white_opac_nine"
+                            app:strokeColor="@color/colorPrimary"
+                            app:strokeWidth="0.5dp">
+
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:padding="5dp">
+
+
+                                <com.jaredrummler.materialspinner.MaterialSpinner
+                                    android:id="@+id/spinnerDistance"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:backgroundTint="@android:color/transparent"
+                                    android:fontFamily="@font/helvetica_ce_oblique"
+                                    android:gravity="center_vertical"
+                                    android:maxLines="1"
+                                    android:hint="@string/distance"
+                                    android:paddingLeft="5dp"
+                                    android:paddingRight="5dp"
+                                    android:textSize="14sp"
+                                    android:textColor="@color/home_text_color"
+                                    android:textColorHint="@color/text_hint_grey"
+                                    app:ms_arrow_tint="@color/colorPrimary"
+                                    app:ms_padding_bottom="7dp"
+                                    app:ms_padding_left="0dp"
+                                    app:ms_padding_right="0dp"
+                                    app:ms_popup_padding_top="0dp" />
+
+
+                            </RelativeLayout>
+
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="5dp"
+                            android:text="Finish Place"
+                            android:textColor="@color/home_text_color" />
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cardViewFinishPlace"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_margin="5dp"
+                            app:cardBackgroundColor="@color/white_opac_nine"
+                            app:strokeColor="@color/colorPrimary"
+                            app:strokeWidth="0.5dp">
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:padding="5dp">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/editTextFinishPlace"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@android:color/transparent"
+                                    android:fontFamily="@font/helvetica_ce_oblique"
+                                    android:gravity="center_vertical"
+                                    android:hint="Finish Place"
+                                    android:inputType="number"
+                                    android:maxLines="1"
+                                    android:paddingLeft="5dp"
+                                    android:paddingRight="5dp"
+                                    android:textColor="@color/home_text_color"
+                                    android:textColorHint="@color/text_hint_grey"
+                                    android:textSize="14sp" />
+
+
+                            </LinearLayout>
+
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/buttonClearFilter"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/grey_font"
+                        android:text="Clear" />
+
+                    <Button
+                        android:id="@+id/buttonApplyFilter"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:text="Apply" />
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layoutRaceDateTime"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_opac"
+        android:visibility="gone">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:elevation="2dp"
+            app:cardBackgroundColor="@color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <DatePicker
+                    android:id="@+id/datePickerRace"
+                    android:layout_width="wrap_content"
+                    android:layout_height="350dp"
+
+                    />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/buttonDoneRaceDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Done"
+                    android:textAllCaps="false" />
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/progressLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <androidx.core.widget.ContentLoadingProgressBar
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerInParent="true" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

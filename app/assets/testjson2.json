@@ -1,0 +1,30 @@
+{
+  "city": "Lahore",
+  "country": "Pakistan",
+  "enjoyment_rating": 4,
+  "feel_meter_rating": 5,
+  "park_name": "Melbourne Grounds",
+  "run_terrain": [
+    "Mountains"
+  ],
+  "shoes_profile_id": 4,
+  "state": "Punjab",
+  "street_address": "11 Street Melbourne Grounds near Downtown Brooklyn",
+  "token": "9fDRQCbm51Z3caQHwFLQVIyoVnyPe7xE20kd2ZSq1604648348",
+  "toughness_rating": 5,
+  "training_route": "F2 Run",
+  "user_gallery": [],
+  "user_run": {
+    "course_type": "Trail-Off-Road",
+    "date": "2020-11-06 20:39",
+    "distance": 1.0,
+    "hour": 0,
+    "minute": 25,
+    "notes": "",
+    "second": 25,
+    "temperature": "Nice (55-69)",
+    "unit": "Mile",
+    "weather": "Rainy"
+  },
+  "zip_code": "54600"
+}
