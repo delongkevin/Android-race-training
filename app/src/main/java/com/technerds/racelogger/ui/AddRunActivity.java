@@ -139,9 +139,9 @@ public class AddRunActivity extends AppCompatActivity /* implements OnCompressLi
     // private StatePicker statePicker;
     // private CityPicker cityPicker;
     // arrays of state object
-    public static List<State> stateObject;
+    // public static List<State> stateObject;
     // arrays of city object
-    public static List<City> cityObject;
+    // public static List<City> cityObject;
     public static int countryID, stateID;
     
     @Override
