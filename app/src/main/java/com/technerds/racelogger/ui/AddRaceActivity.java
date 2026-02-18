@@ -58,15 +58,15 @@ import com.technerds.racelogger.adapters.PicAdapter;
 import com.technerds.racelogger.databinding.ActivityAddRaceBinding;
 import com.technerds.racelogger.listeners.MyAdapterListener;
 import com.technerds.racelogger.viewModels.shoeProfiles.GetShoeProfilesViewModel;
-import com.vikktorn.picker.City;
-import com.vikktorn.picker.CityPicker;
-import com.vikktorn.picker.Country;
-import com.vikktorn.picker.CountryPicker;
-import com.vikktorn.picker.OnCityPickerListener;
-import com.vikktorn.picker.OnCountryPickerListener;
-import com.vikktorn.picker.OnStatePickerListener;
-import com.vikktorn.picker.State;
-import com.vikktorn.picker.StatePicker;
+// import com.vikktorn.picker.City;
+// import com.vikktorn.picker.CityPicker;
+// import com.vikktorn.picker.Country;
+// import com.vikktorn.picker.CountryPicker;
+// import com.vikktorn.picker.OnCityPickerListener;
+// import com.vikktorn.picker.OnCountryPickerListener;
+// import com.vikktorn.picker.OnStatePickerListener;
+// import com.vikktorn.picker.State;
+// import com.vikktorn.picker.StatePicker;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -84,15 +84,15 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import me.shaohui.advancedluban.Luban;
-import me.shaohui.advancedluban.OnCompressListener;
+// import me.shaohui.advancedluban.Luban;
+// import me.shaohui.advancedluban.OnCompressListener;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Response;
 
-public class AddRaceActivity extends AppCompatActivity implements OnCompressListener, OnStatePickerListener, OnCountryPickerListener, OnCityPickerListener {
+public class AddRaceActivity extends AppCompatActivity /* implements OnCompressListener, OnStatePickerListener, OnCountryPickerListener, OnCityPickerListener */ {
     
     private static final int CHOSE_IMAGE_FROM_GALLERY_REQUEST_CODE = 101;
     private static final int Camera_Result_Act = 2;
@@ -139,13 +139,13 @@ public class AddRaceActivity extends AppCompatActivity implements OnCompressList
     int feel_meter_rating = 0;
     int toughness_rating = 0;
     
-    private CountryPicker countryPicker;
-    private StatePicker statePicker;
-    private CityPicker cityPicker;
+    // private CountryPicker countryPicker;
+    // private StatePicker statePicker;
+    // private CityPicker cityPicker;
     // arrays of state object
-    public static List<State> stateObject;
+    // public static List<State> stateObject;
     // arrays of city object
-    public static List<City> cityObject;
+    // public static List<City> cityObject;
     public static int countryID, stateID;
     
     @Override
@@ -1452,9 +1452,10 @@ public class AddRaceActivity extends AppCompatActivity implements OnCompressList
     }
     
     public void getCompressedImage(File file) {
-        Luban.compress(this, file)
-                .putGear(Luban.FIRST_GEAR)      // set the compress mode, default is : THIRD_GEAR
-                .launch(this);
+        // Luban.compress(this, file)
+        //         .putGear(Luban.FIRST_GEAR)      // set the compress mode, default is : THIRD_GEAR
+        //         .launch(this);
+        uploadPic(file);
     }
     
     @Override
@@ -1462,19 +1463,20 @@ public class AddRaceActivity extends AppCompatActivity implements OnCompressList
         super.onStart();
     }
     
-    @Override
-    public void onSuccess(File file) {
-        uploadPic(file);
-    }
+    // @Override
+    // public void onSuccess(File file) {
+    //     uploadPic(file);
+    // }
     
-    @Override
-    public void onError(Throwable e) {
+    // @Override
+    // public void onError(Throwable e) {
     
-    }
+    // }
     
     // Country Picker
     
     public void countryPickerInit() {
+        /*
         // initiate state object, parser, and arrays
         // initialize country picker
         
@@ -1500,12 +1502,13 @@ public class AddRaceActivity extends AppCompatActivity implements OnCompressList
         setCountryListener();
         //  setStateListener();
         //  setCityListener();
-        
+        */
         
     }
     
     //SET COUNTRY LISTENER
     private void setCountryListener() {
+        /*
         Log.wtf("-this", " Set Country Listener ");
         binding.editTextCountry.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1515,10 +1518,12 @@ public class AddRaceActivity extends AppCompatActivity implements OnCompressList
                     countryPicker.showDialog(getSupportFragmentManager());
             }
         });
+        */
     }
     
     // SET STATE LISTENER
     private void setStateListener() {
+        /*
         binding.editTextState.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -1526,11 +1531,13 @@ public class AddRaceActivity extends AppCompatActivity implements OnCompressList
                     statePicker.showDialog(getSupportFragmentManager());
             }
         });
+        */
     }
     
     
     //SET CITY LISTENER
     private void setCityListener() {
+        /*
         binding.editTextCity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -1538,11 +1545,13 @@ public class AddRaceActivity extends AppCompatActivity implements OnCompressList
                     cityPicker.showDialog(getSupportFragmentManager());
             }
         });
+        */
     }
     
     // ON SELECTED COUNTRY ADD STATES TO PICKER
-    @Override
-    public void onSelectCountry(Country country) {
+    // @Override
+    public void onSelectCountry(/* Country country */) {
+        /*
         // get country name and country ID
         binding.editTextCountry.setText(country.getName());
         countryID = country.getCountryId();
@@ -1578,14 +1587,14 @@ public class AddRaceActivity extends AppCompatActivity implements OnCompressList
         }
         
         setStateListener();
-        
+        */
         
     }
     
     // ON SELECTED STATE ADD CITY TO PICKER
-    @Override
-    public void onSelectState(State state) {
-        
+    // @Override
+    public void onSelectState(/* State state */) {
+        /*
         setCityListener();
         cityPicker.equalCityObject.clear();
         
@@ -1604,12 +1613,13 @@ public class AddRaceActivity extends AppCompatActivity implements OnCompressList
                 cityPicker.equalCityObject.add(cityData);
             }
         }
+        */
     }
     
     // ON SELECTED CITY
-    @Override
-    public void onSelectCity(City city) {
-        binding.editTextCity.setText(city.getCityName());
+    // @Override
+    public void onSelectCity(/* City city */) {
+        // binding.editTextCity.setText(city.getCityName());
     }
     
     @Override
@@ -1637,12 +1647,12 @@ public class AddRaceActivity extends AppCompatActivity implements OnCompressList
         JSONArray events = jsonObject.getJSONArray("states");
         for (int j = 0; j < events.length(); j++) {
             JSONObject cit = events.getJSONObject(j);
-            State stateData = new State();
+            // State stateData = new State();
             
-            stateData.setStateId(Integer.parseInt(cit.getString("id")));
-            stateData.setStateName(cit.getString("name"));
-            stateData.setCountryId(Integer.parseInt(cit.getString("country_id")));
-            stateObject.add(stateData);
+            // stateData.setStateId(Integer.parseInt(cit.getString("id")));
+            // stateData.setStateName(cit.getString("name"));
+            // stateData.setCountryId(Integer.parseInt(cit.getString("country_id")));
+            // stateObject.add(stateData);
         }
     }
     
@@ -1666,12 +1676,12 @@ public class AddRaceActivity extends AppCompatActivity implements OnCompressList
         JSONArray events = jsonObject.getJSONArray("cities");
         for (int j = 0; j < events.length(); j++) {
             JSONObject cit = events.getJSONObject(j);
-            City cityData = new City();
+            // City cityData = new City();
             
-            cityData.setCityId(Integer.parseInt(cit.getString("id")));
-            cityData.setCityName(cit.getString("name"));
-            cityData.setStateId(Integer.parseInt(cit.getString("state_id")));
-            cityObject.add(cityData);
+            // cityData.setCityId(Integer.parseInt(cit.getString("id")));
+            // cityData.setCityName(cit.getString("name"));
+            // cityData.setStateId(Integer.parseInt(cit.getString("state_id")));
+            // cityObject.add(cityData);
         }
     }
     

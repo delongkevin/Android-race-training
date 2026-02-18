@@ -48,7 +48,7 @@ import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.Gson;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.technerds.racelogger.Utils.DateFormatter;
@@ -67,15 +67,15 @@ import com.technerds.racelogger.dataModels.editProfileModel.EditProfileModel;
 import com.technerds.racelogger.dataModels.getProfileModel.GetProfileModel;
 import com.technerds.racelogger.databinding.ActivityEditProfileBinding;
 import com.technerds.racelogger.ui.CameraActivity;
-import com.vikktorn.picker.City;
-import com.vikktorn.picker.CityPicker;
-import com.vikktorn.picker.Country;
-import com.vikktorn.picker.CountryPicker;
-import com.vikktorn.picker.OnCityPickerListener;
-import com.vikktorn.picker.OnCountryPickerListener;
-import com.vikktorn.picker.OnStatePickerListener;
-import com.vikktorn.picker.State;
-import com.vikktorn.picker.StatePicker;
+// import com.vikktorn.picker.City;
+// import com.vikktorn.picker.CityPicker;
+// import com.vikktorn.picker.Country;
+// import com.vikktorn.picker.CountryPicker;
+// import com.vikktorn.picker.OnCityPickerListener;
+// import com.vikktorn.picker.OnCountryPickerListener;
+// import com.vikktorn.picker.OnStatePickerListener;
+// import com.vikktorn.picker.State;
+// import com.vikktorn.picker.StatePicker;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -90,15 +90,15 @@ import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
-import me.shaohui.advancedluban.Luban;
-import me.shaohui.advancedluban.OnCompressListener;
+// import me.shaohui.advancedluban.Luban;
+// import me.shaohui.advancedluban.OnCompressListener;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Response;
 
-public class EditProfileActivity extends AppCompatActivity implements OnCompressListener, LocationListener, OnStatePickerListener, OnCountryPickerListener, OnCityPickerListener {
+public class EditProfileActivity extends AppCompatActivity implements /*OnCompressListener,*/ LocationListener/*, OnStatePickerListener, OnCountryPickerListener, OnCityPickerListener*/ {
     private static final int CHOSE_IMAGE_FROM_GALLERY_REQUEST_CODE = 101;
     private static final int Camera_Result_Act = 2;
     
@@ -126,14 +126,14 @@ public class EditProfileActivity extends AppCompatActivity implements OnCompress
     Calendar calendar;
     private String year;
     
-    private CountryPicker countryPicker;
-    private StatePicker statePicker;
-    private CityPicker cityPicker;
+    //private CountryPicker countryPicker;
+    //private StatePicker statePicker;
+    //private CityPicker cityPicker;
     // arrays of state object
-    public static List<State> stateObject;
+    //public static List<State> stateObject;
     // arrays of city object
-    public static List<City> cityObject;
-    public static int countryID, stateID;
+    //public static List<City> cityObject;
+    //public static int countryID, stateID;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -165,9 +165,17 @@ public class EditProfileActivity extends AppCompatActivity implements OnCompress
         calendar = Calendar.getInstance();
         TimeZone timeZone = TimeZone.getDefault();
         timeZoneS = timeZone.getID().toString();
-        fcm_token = FirebaseInstanceId.getInstance().getToken();
-        Log.wtf("-this", "FCM Token : " + fcm_token);
-        countryPickerInit();
+        
+        // Get FCM token using new Firebase Messaging API
+        FirebaseMessaging.getInstance().getToken()
+            .addOnCompleteListener(task -> {
+                if (task.isSuccessful() && task.getResult() != null) {
+                    fcm_token = task.getResult();
+                    Log.wtf("-this", "FCM Token : " + fcm_token);
+                }
+            });
+        
+        //countryPickerInit();
         binding.spinnerGender.setItems("Male", "Female", "Other");
         binding.spinnerGender.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
             
@@ -652,7 +660,8 @@ public class EditProfileActivity extends AppCompatActivity implements OnCompress
             String selectedFilePath = FileUtils.getPath(this, uri);
             Log.wtf("-this", "Image Path : " + selectedFilePath);
             final File file = new File(selectedFilePath);
-            getCompressedImage(file);
+            //getCompressedImage(file);
+            uploadPic(file);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -748,11 +757,11 @@ public class EditProfileActivity extends AppCompatActivity implements OnCompress
         }
     }
     
-    public void getCompressedImage(File file) {
+    /*public void getCompressedImage(File file) {
         Luban.compress(this, file)
                 .putGear(Luban.FIRST_GEAR)      // set the compress mode, default is : THIRD_GEAR
                 .launch(this);
-    }
+    }*/
     
     public void dummyBgClicked(View view) {
     }
@@ -762,14 +771,14 @@ public class EditProfileActivity extends AppCompatActivity implements OnCompress
         super.onStart();
     }
     
-    @Override
+    /*@Override
     public void onSuccess(File file) {
         uploadPic(file);
     }
     
     @Override
     public void onError(Throwable e) {
-    }
+    }*/
     
     public void backClicked(View view) {
         onBackPressed();
@@ -966,7 +975,7 @@ public class EditProfileActivity extends AppCompatActivity implements OnCompress
     
     // Country Picker
     
-    public void countryPickerInit() {
+    /*public void countryPickerInit() {
         // initiate state object, parser, and arrays
         // initialize country picker
         
@@ -994,10 +1003,10 @@ public class EditProfileActivity extends AppCompatActivity implements OnCompress
         //  setCityListener();
         
         
-    }
+    }*/
     
     //SET COUNTRY LISTENER
-    private void setCountryListener() {
+    /*private void setCountryListener() {
         Log.wtf("-this"," Set Country Listener ");
         binding.editTextCountry.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1006,31 +1015,31 @@ public class EditProfileActivity extends AppCompatActivity implements OnCompress
                 countryPicker.showDialog(getSupportFragmentManager());
             }
         });
-    }
+    }*/
     
     // SET STATE LISTENER
-    private void setStateListener() {
+    /*private void setStateListener() {
         binding.editTextState.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 statePicker.showDialog(getSupportFragmentManager());
             }
         });
-    }
+    }*/
     
     
     //SET CITY LISTENER
-    private void setCityListener() {
+    /*private void setCityListener() {
         binding.editTextCity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 cityPicker.showDialog(getSupportFragmentManager());
             }
         });
-    }
+    }*/
     
     // ON SELECTED COUNTRY ADD STATES TO PICKER
-    @Override
+    /*@Override
     public void onSelectCountry(Country country) {
         // get country name and country ID
         binding.editTextCountry.setText(country.getName());
@@ -1062,10 +1071,10 @@ public class EditProfileActivity extends AppCompatActivity implements OnCompress
                 statePicker.equalStateObject.add(stateData);
             }
         }
-    }
+    }*/
     
     // ON SELECTED STATE ADD CITY TO PICKER
-    @Override
+    /*@Override
     public void onSelectState(State state) {
         
         setCityListener();
@@ -1086,13 +1095,13 @@ public class EditProfileActivity extends AppCompatActivity implements OnCompress
                 cityPicker.equalCityObject.add(cityData);
             }
         }
-    }
+    }*/
     
     // ON SELECTED CITY
-    @Override
+    /*@Override
     public void onSelectCity(City city) {
         binding.editTextCity.setText(city.getCityName());
-    }
+    }*/
     
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
@@ -1119,12 +1128,12 @@ public class EditProfileActivity extends AppCompatActivity implements OnCompress
         JSONArray events = jsonObject.getJSONArray("states");
         for (int j = 0; j < events.length(); j++) {
             JSONObject cit = events.getJSONObject(j);
-            State stateData = new State();
+            // State stateData = new State();
             
-            stateData.setStateId(Integer.parseInt(cit.getString("id")));
-            stateData.setStateName(cit.getString("name"));
-            stateData.setCountryId(Integer.parseInt(cit.getString("country_id")));
-            stateObject.add(stateData);
+            // stateData.setStateId(Integer.parseInt(cit.getString("id")));
+            // stateData.setStateName(cit.getString("name"));
+            // stateData.setCountryId(Integer.parseInt(cit.getString("country_id")));
+            // stateObject.add(stateData);
         }
     }
     
@@ -1148,12 +1157,12 @@ public class EditProfileActivity extends AppCompatActivity implements OnCompress
         JSONArray events = jsonObject.getJSONArray("cities");
         for (int j = 0; j < events.length(); j++) {
             JSONObject cit = events.getJSONObject(j);
-            City cityData = new City();
+            // City cityData = new City();
             
-            cityData.setCityId(Integer.parseInt(cit.getString("id")));
-            cityData.setCityName(cit.getString("name"));
-            cityData.setStateId(Integer.parseInt(cit.getString("state_id")));
-            cityObject.add(cityData);
+            // cityData.setCityId(Integer.parseInt(cit.getString("id")));
+            // cityData.setCityName(cit.getString("name"));
+            // cityData.setStateId(Integer.parseInt(cit.getString("state_id")));
+            // cityObject.add(cityData);
         }
     }
 }

@@ -1,5 +1,10 @@
 package com.technerds.racelogger.ui;
 
+// TODO: CameraX API has changed significantly from alpha to 1.2.3
+// The camera functionality needs to be updated to use ProcessCameraProvider
+// instead of the deprecated CameraX, PreviewConfig, and ImageCaptureConfig classes
+// See: https://developer.android.com/training/camerax/architecture
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -25,11 +30,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.camera.core.CameraInfoUnavailableException;
-import androidx.camera.core.CameraX;
+import androidx.camera.core.CameraSelector;
 import androidx.camera.core.ImageCapture;
-import androidx.camera.core.ImageCaptureConfig;
 import androidx.camera.core.Preview;
-import androidx.camera.core.PreviewConfig;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.LifecycleOwner;
@@ -51,8 +54,8 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
 
-import me.shaohui.advancedluban.Luban;
-import me.shaohui.advancedluban.OnCompressListener;
+// import me.shaohui.advancedluban.Luban;
+// import me.shaohui.advancedluban.OnCompressListener;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -60,7 +63,7 @@ import okhttp3.ResponseBody;
 import retrofit2.Response;
 
 
-public class CameraActivity extends AppCompatActivity implements OnCompressListener {
+public class CameraActivity extends AppCompatActivity /* implements OnCompressListener */ {
     private int REQUEST_CODE_PERMISSIONS = 101;
     private final String[] REQUIRED_PERMISSIONS = new String[]{"android.permission.CAMERA", "android.permission.WRITE_EXTERNAL_STORAGE"};
     TextureView textureView;
@@ -70,7 +73,7 @@ public class CameraActivity extends AppCompatActivity implements OnCompressListe
     SharedPreferences mySharedPreference;
     int c = 0;
     UploadFileViewModel uploadFileViewModel;
-    private CameraX.LensFacing lensFacing = CameraX.LensFacing.BACK;
+    private int lensFacing = CameraSelector.LENS_FACING_BACK;
     ImageCapture imgCap;
     
     @Override
@@ -97,7 +100,7 @@ public class CameraActivity extends AppCompatActivity implements OnCompressListe
         setupViewModels();
         
         if (allPermissionsGranted()) {
-            startCamera(); //start camera if permission has been granted by user
+            // startCamera(); //start camera if permission has been granted by user
         } else {
             ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS);
         }
@@ -109,6 +112,8 @@ public class CameraActivity extends AppCompatActivity implements OnCompressListe
         
     }
     
+    // Camera functionality temporarily disabled - needs CameraX API migration
+    /*
     private void startCamera() {
         
         CameraX.unbindAll();
@@ -200,7 +205,9 @@ public class CameraActivity extends AppCompatActivity implements OnCompressListe
         //bind to lifecycle:
         CameraX.bindToLifecycle((LifecycleOwner) this, preview, imgCap);
     }
+    */
     
+    /*
     private void bindCameraUseCases() {
         // Make sure that there are no other use cases bound to CameraX
         CameraX.unbindAll();
@@ -239,6 +246,7 @@ public class CameraActivity extends AppCompatActivity implements OnCompressListe
         // Apply declared configs to CameraX using the same lifecycle owner
         CameraX.bindToLifecycle((LifecycleOwner) this, preview, imgCap);
     }
+    */
     
     private void updateTransform() {
         Matrix mx = new Matrix();
@@ -277,7 +285,7 @@ public class CameraActivity extends AppCompatActivity implements OnCompressListe
         
         if (requestCode == REQUEST_CODE_PERMISSIONS) {
             if (allPermissionsGranted()) {
-                startCamera();
+                // startCamera();
             } else {
                 Toast.makeText(this, "Permissions not granted by the user.", Toast.LENGTH_SHORT).show();
                 finish();
@@ -380,9 +388,10 @@ public class CameraActivity extends AppCompatActivity implements OnCompressListe
     }
     
     public void getCompressedImage(File file) {
-        Luban.compress(this, file)
-                .putGear(Luban.FIRST_GEAR)      // set the compress mode, default is : THIRD_GEAR
-                .launch(this);
+        // Luban.compress(this, file)
+        //         .putGear(Luban.FIRST_GEAR)      // set the compress mode, default is : THIRD_GEAR
+        //         .launch(this);
+        uploadPic(file);
     }
     
     public void dummyBgClicked(View view) {
@@ -393,13 +402,13 @@ public class CameraActivity extends AppCompatActivity implements OnCompressListe
         super.onStart();
     }
     
-    @Override
-    public void onSuccess(File file) {
-        uploadPic(file);
-    }
+    // @Override
+    // public void onSuccess(File file) {
+    //     uploadPic(file);
+    // }
     
-    @Override
-    public void onError(Throwable e) {
+    // @Override
+    // public void onError(Throwable e) {
     
-    }
+    // }
 }

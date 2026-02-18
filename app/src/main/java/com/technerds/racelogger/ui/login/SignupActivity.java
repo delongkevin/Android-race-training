@@ -40,7 +40,7 @@ import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.Gson;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.technerds.racelogger.Utils.DateFormatter;
@@ -57,6 +57,8 @@ import com.technerds.racelogger.Utils.MyShardPreferences;
 import com.technerds.racelogger.viewModels.UploadFileViewModel;
 import com.technerds.racelogger.databinding.ActivitySignupBinding;
 import com.technerds.racelogger.ui.HomeActivity;
+// Country/State/City picker library temporarily disabled due to unavailability
+/*
 import com.vikktorn.picker.City;
 import com.vikktorn.picker.CityPicker;
 import com.vikktorn.picker.Country;
@@ -66,6 +68,7 @@ import com.vikktorn.picker.OnCountryPickerListener;
 import com.vikktorn.picker.OnStatePickerListener;
 import com.vikktorn.picker.State;
 import com.vikktorn.picker.StatePicker;
+*/
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -80,15 +83,18 @@ import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
+// Luban image compression library temporarily disabled due to unavailability
+/*
 import me.shaohui.advancedluban.Luban;
 import me.shaohui.advancedluban.OnCompressListener;
+*/
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Response;
 
-public class SignupActivity extends AppCompatActivity implements OnCompressListener, LocationListener, OnStatePickerListener, OnCountryPickerListener, OnCityPickerListener {
+public class SignupActivity extends AppCompatActivity implements /* OnCompressListener, */ LocationListener/*, OnStatePickerListener, OnCountryPickerListener, OnCityPickerListener */ {
     private static final int CHOSE_IMAGE_FROM_GALLERY_REQUEST_CODE = 101;
     private static final int Camera_Result_Act = 2;
 
@@ -114,6 +120,7 @@ public class SignupActivity extends AppCompatActivity implements OnCompressListe
     Calendar calendar;
     private String year;
     
+    /*
     private CountryPicker countryPicker;
     private StatePicker statePicker;
     private CityPicker cityPicker;
@@ -121,6 +128,7 @@ public class SignupActivity extends AppCompatActivity implements OnCompressListe
     public static List<State> stateObject;
     // arrays of city object
     public static List<City> cityObject;
+    */
     public static int countryID, stateID;
 
     @Override
@@ -150,9 +158,17 @@ public class SignupActivity extends AppCompatActivity implements OnCompressListe
         calendar = Calendar.getInstance();
         TimeZone timeZone = TimeZone.getDefault();
         timeZoneS = timeZone.getID().toString();
-        fcm_token = FirebaseInstanceId.getInstance().getToken();
-        Log.wtf("-this", "FCM Token : " + fcm_token);
-        countryPickerInit();
+        
+        // Get FCM token using new Firebase Messaging API
+        FirebaseMessaging.getInstance().getToken()
+            .addOnCompleteListener(task -> {
+                if (task.isSuccessful() && task.getResult() != null) {
+                    fcm_token = task.getResult();
+                    Log.wtf("-this", "FCM Token : " + fcm_token);
+                }
+            });
+        
+        // countryPickerInit(); // Temporarily disabled
 
         binding.spinnerGender.setItems("Male", "Female", "Other");
         binding.spinnerGender.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
@@ -418,7 +434,13 @@ public class SignupActivity extends AppCompatActivity implements OnCompressListe
         } else {
             if(fcmCorrect == false){
                 Snackbar.make(view, "Connection Error.Please make sure you are connected to the internet.", Snackbar.LENGTH_SHORT).show();
-                fcm_token = FirebaseInstanceId.getInstance().getToken();
+                // Refresh FCM token
+                FirebaseMessaging.getInstance().getToken()
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful() && task.getResult() != null) {
+                            fcm_token = task.getResult();
+                        }
+                    });
             } else  if(locCorrect == false){
                 Snackbar.make(view, "Cannot find location. Please Turn on the GPS.", Snackbar.LENGTH_SHORT).show();
             }  else {
@@ -689,10 +711,14 @@ public class SignupActivity extends AppCompatActivity implements OnCompressListe
         }
     }
 
+    // Luban image compression temporarily disabled - using direct upload
     public void getCompressedImage(File file) {
-        Luban.compress(this, file)
-                .putGear(Luban.FIRST_GEAR)      // set the compress mode, default is : THIRD_GEAR
-                .launch(this);
+        // Luban.compress(this, file)
+        //         .putGear(Luban.FIRST_GEAR)
+        //         .launch(this);
+        
+        // Directly upload without compression
+        uploadPic(file);
     }
 
     public void dummyBgClicked(View view) {
@@ -703,6 +729,8 @@ public class SignupActivity extends AppCompatActivity implements OnCompressListe
         super.onStart();
     }
 
+    // Luban compression listener temporarily disabled
+    /*
     @Override
     public void onSuccess(File file) {
         uploadPic(file);
@@ -711,6 +739,7 @@ public class SignupActivity extends AppCompatActivity implements OnCompressListe
     @Override
     public void onError(Throwable e) {
     }
+    */
 
     public void backClicked(View view) {
         onBackPressed();
@@ -910,8 +939,8 @@ public class SignupActivity extends AppCompatActivity implements OnCompressListe
         // initiate state object, parser, and arrays
         // initialize country picker
         
-        stateObject = new ArrayList<>();
-        cityObject = new ArrayList<>();
+        // stateObject = new ArrayList<>();
+        // cityObject = new ArrayList<>();
         
         try {
             getStateJson();
@@ -925,7 +954,7 @@ public class SignupActivity extends AppCompatActivity implements OnCompressListe
             e.printStackTrace();
         }
         
-        countryPicker = new CountryPicker.Builder().with(this).listener(this).build();
+        // countryPicker = new CountryPicker.Builder().with(this).listener(this).build();
 
         // initialize listeners
         
@@ -943,7 +972,7 @@ public class SignupActivity extends AppCompatActivity implements OnCompressListe
             @Override
             public void onClick(View v) {
                 Log.wtf("-this"," Country Listener Clicked ");
-                countryPicker.showDialog(getSupportFragmentManager());
+                // countryPicker.showDialog(getSupportFragmentManager());
             }
         });
     }
@@ -953,7 +982,7 @@ public class SignupActivity extends AppCompatActivity implements OnCompressListe
         binding.editTextState.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                statePicker.showDialog(getSupportFragmentManager());
+                // statePicker.showDialog(getSupportFragmentManager());
             }
         });
     }
@@ -964,11 +993,13 @@ public class SignupActivity extends AppCompatActivity implements OnCompressListe
         binding.editTextCity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cityPicker.showDialog(getSupportFragmentManager());
+                // cityPicker.showDialog(getSupportFragmentManager());
             }
         });
     }
     
+    // Country/State/City picker methods temporarily disabled
+    /*
     // ON SELECTED COUNTRY ADD STATES TO PICKER
     @Override
     public void onSelectCountry(Country country) {
@@ -1035,6 +1066,7 @@ public class SignupActivity extends AppCompatActivity implements OnCompressListe
     public void onSelectCity(City city) {
         binding.editTextCity.setText(city.getCityName());
     }
+    */
     
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
@@ -1061,12 +1093,12 @@ public class SignupActivity extends AppCompatActivity implements OnCompressListe
         JSONArray events = jsonObject.getJSONArray("states");
         for (int j = 0; j < events.length(); j++) {
             JSONObject cit = events.getJSONObject(j);
-            State stateData = new State();
+            // State stateData = new State();
             
-            stateData.setStateId(Integer.parseInt(cit.getString("id")));
-            stateData.setStateName(cit.getString("name"));
-            stateData.setCountryId(Integer.parseInt(cit.getString("country_id")));
-            stateObject.add(stateData);
+            // stateData.setStateId(Integer.parseInt(cit.getString("id")));
+            // stateData.setStateName(cit.getString("name"));
+            // stateData.setCountryId(Integer.parseInt(cit.getString("country_id")));
+            // stateObject.add(stateData);
         }
     }
     
@@ -1090,12 +1122,12 @@ public class SignupActivity extends AppCompatActivity implements OnCompressListe
         JSONArray events = jsonObject.getJSONArray("cities");
         for (int j = 0; j < events.length(); j++) {
             JSONObject cit = events.getJSONObject(j);
-            City cityData = new City();
+            // City cityData = new City();
             
-            cityData.setCityId(Integer.parseInt(cit.getString("id")));
-            cityData.setCityName(cit.getString("name"));
-            cityData.setStateId(Integer.parseInt(cit.getString("state_id")));
-            cityObject.add(cityData);
+            // cityData.setCityId(Integer.parseInt(cit.getString("id")));
+            // cityData.setCityName(cit.getString("name"));
+            // cityData.setStateId(Integer.parseInt(cit.getString("state_id")));
+            // cityObject.add(cityData);
         }
     }
 

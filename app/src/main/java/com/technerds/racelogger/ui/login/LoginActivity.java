@@ -36,7 +36,7 @@ import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.Gson;
 import com.technerds.racelogger.dataModels.SignInSendModel;
 import com.technerds.racelogger.dataModels.signupModel.SignupRecieveModel;
@@ -98,8 +98,17 @@ public class LoginActivity extends AppCompatActivity implements LocationListener
 
         TimeZone timeZone = TimeZone.getDefault();
         timeZoneS = timeZone.getID().toString();
-        fcm_token = FirebaseInstanceId.getInstance().getToken();
-        Log.wtf("-this", "FCM Token : " + fcm_token);
+        
+        // Get FCM token using new Firebase Messaging API
+        FirebaseMessaging.getInstance().getToken()
+            .addOnCompleteListener(task -> {
+                if (task.isSuccessful() && task.getResult() != null) {
+                    fcm_token = task.getResult();
+                    Log.wtf("-this", "FCM Token : " + fcm_token);
+                } else {
+                    Log.wtf("-this", "FCM Token fetch failed", task.getException());
+                }
+            });
 
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -222,7 +231,13 @@ public class LoginActivity extends AppCompatActivity implements LocationListener
         } else {
             if(fcmCorrect == false){
                 Snackbar.make(view, "Connection Error.Please make sure you are connected to the internet.", Snackbar.LENGTH_SHORT).show();
-                fcm_token = FirebaseInstanceId.getInstance().getToken();
+                // Refresh FCM token
+                FirebaseMessaging.getInstance().getToken()
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful() && task.getResult() != null) {
+                            fcm_token = task.getResult();
+                        }
+                    });
             } else  if(locCorrect == false){
                 Snackbar.make(view, "Cannot find location. Please Turn on the GPS.", Snackbar.LENGTH_SHORT).show();
     
