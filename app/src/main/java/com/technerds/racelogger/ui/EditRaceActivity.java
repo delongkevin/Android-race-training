@@ -1843,12 +1843,12 @@ public class EditRaceActivity extends AppCompatActivity /* implements OnCompress
         JSONArray events = jsonObject.getJSONArray("states");
         for (int j = 0; j < events.length(); j++) {
             JSONObject cit = events.getJSONObject(j);
-            State stateData = new State();
+            // State stateData = new State();
 
-            stateData.setStateId(Integer.parseInt(cit.getString("id")));
-            stateData.setStateName(cit.getString("name"));
-            stateData.setCountryId(Integer.parseInt(cit.getString("country_id")));
-            stateObject.add(stateData);
+            // stateData.setStateId(Integer.parseInt(cit.getString("id")));
+            // stateData.setStateName(cit.getString("name"));
+            // stateData.setCountryId(Integer.parseInt(cit.getString("country_id")));
+            // stateObject.add(stateData);
         }
     }
 
@@ -1872,12 +1872,12 @@ public class EditRaceActivity extends AppCompatActivity /* implements OnCompress
         JSONArray events = jsonObject.getJSONArray("cities");
         for (int j = 0; j < events.length(); j++) {
             JSONObject cit = events.getJSONObject(j);
-            City cityData = new City();
+            // City cityData = new City();
 
-            cityData.setCityId(Integer.parseInt(cit.getString("id")));
-            cityData.setCityName(cit.getString("name"));
-            cityData.setStateId(Integer.parseInt(cit.getString("state_id")));
-            cityObject.add(cityData);
+            // cityData.setCityId(Integer.parseInt(cit.getString("id")));
+            // cityData.setCityName(cit.getString("name"));
+            // cityData.setStateId(Integer.parseInt(cit.getString("state_id")));
+            // cityObject.add(cityData);
         }
     }
 
