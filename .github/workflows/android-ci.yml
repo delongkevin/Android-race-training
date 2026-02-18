@@ -1,0 +1,170 @@
+name: Android CI/CD
+
+on:
+  push:
+    branches: [ main ]
+    tags:
+      - "v*"
+  pull_request:
+    branches: [ main ]
+
+env:
+  MODULE: app
+  JAVA_VERSION: "17"
+  EMULATOR_API: "30"
+  EMULATOR_ARCH: "x86_64"
+  EMULATOR_TARGET: "default"
+
+jobs:
+  build:
+    name: Build (Debug)
+    runs-on: macos-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: ${{ env.JAVA_VERSION }}
+          cache: gradle
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Make Gradle executable
+        run: chmod +x gradlew
+
+      - name: Create dummy google-services.json if missing
+        run: |
+          if [ ! -f "${{ env.MODULE }}/google-services.json" ]; then
+            echo "Creating dummy google-services.json for CI build..."
+            cat > "${{ env.MODULE }}/google-services.json" << 'EOF'
+            {
+              "project_info": {
+                "project_number": "0",
+                "project_id": "dummy"
+              },
+              "client": [
+                {
+                  "client_info": {
+                    "mobilesdk_app_id": "0:0:android:0",
+                    "android_client_info": {
+                      "package_name": "com.technerds.racelogger"
+                    }
+                  },
+                  "api_key": [
+                    {"current_key": "FAKE"}
+                  ]
+                }
+              ]
+            }
+EOF
+          fi
+
+      - name: Build debug APK
+        run: ./gradlew clean :${{ env.MODULE }}:assembleDebug --stacktrace
+
+      - name: Upload debug APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: debug-apk
+          path: ${{ env.MODULE }}/build/outputs/apk/debug/*.apk
+
+  instrumented-tests:
+    name: Instrumented Tests on Emulator
+    runs-on: macos-latest
+    needs: build
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: ${{ env.JAVA_VERSION }}
+          cache: gradle
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Run connectedCheck on emulator
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: ${{ env.EMULATOR_API }}
+          arch: ${{ env.EMULATOR_ARCH }}
+          target: ${{ env.EMULATOR_TARGET }}
+          profile: pixel_5
+          emulator-options: "-no-snapshot -noaudio -no-boot-anim -camera-back none -camera-front none"
+          script: ./gradlew :${{ env.MODULE }}:connectedCheck --stacktrace
+
+  release:
+    name: Create GitHub Release (tag push)
+    runs-on: macos-latest
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/')
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: ${{ env.JAVA_VERSION }}
+          cache: gradle
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Make Gradle executable
+        run: chmod +x gradlew
+
+      - name: Create dummy google-services.json if missing (release)
+        run: |
+          if [ ! -f "${{ env.MODULE }}/google-services.json" ]; then
+            echo "Creating dummy google-services.json for CI release build..."
+            cat > "${{ env.MODULE }}/google-services.json" << 'EOF'
+            {
+              "project_info": {
+                "project_number": "0",
+                "project_id": "dummy"
+              },
+              "client": [
+                {
+                  "client_info": {
+                    "mobilesdk_app_id": "0:0:android:0",
+                    "android_client_info": {
+                      "package_name": "com.technerds.racelogger"
+                    }
+                  },
+                  "api_key": [
+                    {"current_key": "FAKE"}
+                  ]
+                }
+              ]
+            }
+EOF
+          fi
+
+      - name: Build release APK
+        run: ./gradlew :${{ env.MODULE }}:assembleRelease --stacktrace
+
+      - name: Upload release APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-apk
+          path: ${{ env.MODULE }}/build/outputs/apk/release/*.apk
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ env.MODULE }}/build/outputs/apk/release/*.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
