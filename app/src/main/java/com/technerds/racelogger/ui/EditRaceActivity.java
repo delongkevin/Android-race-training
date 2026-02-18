@@ -82,7 +82,7 @@ import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Response;
 
-public class EditRaceActivity extends AppCompatActivity implements OnCompressListener, OnStatePickerListener, OnCountryPickerListener, OnCityPickerListener {
+public class EditRaceActivity extends AppCompatActivity /* implements OnCompressListener, OnStatePickerListener, OnCountryPickerListener, OnCityPickerListener */ {
 
     private static final int CHOSE_IMAGE_FROM_GALLERY_REQUEST_CODE = 101;
     private static final int Camera_Result_Act = 2;
@@ -133,13 +133,13 @@ public class EditRaceActivity extends AppCompatActivity implements OnCompressLis
     int feel_meter_rating = 0;
     int toughness_rating = 0;
 
-    private CountryPicker countryPicker;
-    private StatePicker statePicker;
-    private CityPicker cityPicker;
+    // private CountryPicker countryPicker;
+    // private StatePicker statePicker;
+    // private CityPicker cityPicker;
     // arrays of state object
-    public static List<State> stateObject;
+    // public static List<State> stateObject;
     // arrays of city object
-    public static List<City> cityObject;
+    // public static List<City> cityObject;
     public static int countryID, stateID;
     int race_id;
 
@@ -1648,9 +1648,10 @@ public class EditRaceActivity extends AppCompatActivity implements OnCompressLis
     }
 
     public void getCompressedImage(File file) {
-        Luban.compress(this, file)
-                .putGear(Luban.FIRST_GEAR)      // set the compress mode, default is : THIRD_GEAR
-                .launch(this);
+        // Luban.compress(this, file)
+        //         .putGear(Luban.FIRST_GEAR)      // set the compress mode, default is : THIRD_GEAR
+        //         .launch(this);
+        uploadPic(file);
     }
 
     @Override
@@ -1658,19 +1659,20 @@ public class EditRaceActivity extends AppCompatActivity implements OnCompressLis
         super.onStart();
     }
 
-    @Override
-    public void onSuccess(File file) {
-        uploadPic(file);
-    }
+    // @Override
+    // public void onSuccess(File file) {
+    //     uploadPic(file);
+    // }
 
-    @Override
-    public void onError(Throwable e) {
+    // @Override
+    // public void onError(Throwable e) {
 
-    }
+    // }
 
     // Country Picker
 
     public void countryPickerInit() {
+        /*
         // initiate state object, parser, and arrays
         // initialize country picker
 
@@ -1696,12 +1698,13 @@ public class EditRaceActivity extends AppCompatActivity implements OnCompressLis
         setCountryListener();
         //  setStateListener();
         //  setCityListener();
-
+        */
 
     }
 
     //SET COUNTRY LISTENER
     private void setCountryListener() {
+        /*
         Log.wtf("-this", " Set Country Listener ");
         binding.editTextCountry.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1711,10 +1714,12 @@ public class EditRaceActivity extends AppCompatActivity implements OnCompressLis
                     countryPicker.showDialog(getSupportFragmentManager());
             }
         });
+        */
     }
 
     // SET STATE LISTENER
     private void setStateListener() {
+        /*
         binding.editTextState.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -1722,11 +1727,13 @@ public class EditRaceActivity extends AppCompatActivity implements OnCompressLis
                     statePicker.showDialog(getSupportFragmentManager());
             }
         });
+        */
     }
 
 
     //SET CITY LISTENER
     private void setCityListener() {
+        /*
         binding.editTextCity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -1734,11 +1741,13 @@ public class EditRaceActivity extends AppCompatActivity implements OnCompressLis
                     cityPicker.showDialog(getSupportFragmentManager());
             }
         });
+        */
     }
 
     // ON SELECTED COUNTRY ADD STATES TO PICKER
-    @Override
-    public void onSelectCountry(Country country) {
+    // @Override
+    public void onSelectCountry(/* Country country */) {
+        /*
         // get country name and country ID
         binding.editTextCountry.setText(country.getName());
         countryID = country.getCountryId();
@@ -1774,14 +1783,14 @@ public class EditRaceActivity extends AppCompatActivity implements OnCompressLis
         }
 
         setStateListener();
-
+        */
 
     }
 
     // ON SELECTED STATE ADD CITY TO PICKER
-    @Override
-    public void onSelectState(State state) {
-
+    // @Override
+    public void onSelectState(/* State state */) {
+        /*
         setCityListener();
         cityPicker.equalCityObject.clear();
 
@@ -1800,12 +1809,13 @@ public class EditRaceActivity extends AppCompatActivity implements OnCompressLis
                 cityPicker.equalCityObject.add(cityData);
             }
         }
+        */
     }
 
     // ON SELECTED CITY
-    @Override
-    public void onSelectCity(City city) {
-        binding.editTextCity.setText(city.getCityName());
+    // @Override
+    public void onSelectCity(/* City city */) {
+        // binding.editTextCity.setText(city.getCityName());
     }
 
     @Override

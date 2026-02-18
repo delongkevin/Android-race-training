@@ -60,7 +60,7 @@ import okhttp3.ResponseBody;
 import retrofit2.Response;
 
 
-public class CameraActivity extends AppCompatActivity implements OnCompressListener {
+public class CameraActivity extends AppCompatActivity /* implements OnCompressListener */ {
     private int REQUEST_CODE_PERMISSIONS = 101;
     private final String[] REQUIRED_PERMISSIONS = new String[]{"android.permission.CAMERA", "android.permission.WRITE_EXTERNAL_STORAGE"};
     TextureView textureView;
@@ -380,9 +380,10 @@ public class CameraActivity extends AppCompatActivity implements OnCompressListe
     }
     
     public void getCompressedImage(File file) {
-        Luban.compress(this, file)
-                .putGear(Luban.FIRST_GEAR)      // set the compress mode, default is : THIRD_GEAR
-                .launch(this);
+        // Luban.compress(this, file)
+        //         .putGear(Luban.FIRST_GEAR)      // set the compress mode, default is : THIRD_GEAR
+        //         .launch(this);
+        uploadPic(file);
     }
     
     public void dummyBgClicked(View view) {
@@ -393,13 +394,13 @@ public class CameraActivity extends AppCompatActivity implements OnCompressListe
         super.onStart();
     }
     
-    @Override
-    public void onSuccess(File file) {
-        uploadPic(file);
-    }
+    // @Override
+    // public void onSuccess(File file) {
+    //     uploadPic(file);
+    // }
     
-    @Override
-    public void onError(Throwable e) {
+    // @Override
+    // public void onError(Throwable e) {
     
-    }
+    // }
 }
