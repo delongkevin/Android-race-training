@@ -71,7 +71,10 @@ All dependencies were updated to compatible versions:
 
 #### Lifecycle
 - `lifecycle-compiler`: 2.2.0 → 2.6.1
-- `lifecycle-extensions`: unchanged at 2.2.0
+- `lifecycle-extensions`: **REMOVED** (deprecated)
+- `lifecycle-viewmodel`: **ADDED** at 2.6.1
+- `lifecycle-livedata`: **ADDED** at 2.6.1
+- `lifecycle-runtime`: **ADDED** at 2.6.1
 
 #### Image Loading
 - `glide`: 4.11.0 → 4.15.1
@@ -80,7 +83,7 @@ All dependencies were updated to compatible versions:
 - `camera-core` & `camera-camera2`: 1.0.0-alpha02 → 1.2.3
 
 #### Other Libraries
-- `material-calendar-view`: 1.7.0 → 1.9.0-rc04
+- `material-calendar-view`: 1.7.0 → 1.9.0
 - `ImageSlideshow`: 0.0.7 → 0.1.2
 
 ## How to Build
