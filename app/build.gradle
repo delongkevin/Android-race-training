@@ -71,7 +71,9 @@ dependencies {
     implementation 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
 
     // ViewModel and LiveData
-    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel:2.6.1"
+    implementation "androidx.lifecycle:lifecycle-livedata:2.6.1"
+    implementation "androidx.lifecycle:lifecycle-runtime:2.6.1"
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:2.6.1"
 
     //Glide
@@ -100,7 +102,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:4.10.0'
 
     //Calendar
-    implementation 'com.applandeo:material-calendar-view:1.9.0-rc04'
+    implementation 'com.applandeo:material-calendar-view:1.9.0'
 
     // Swipeable Recyclerview
 
