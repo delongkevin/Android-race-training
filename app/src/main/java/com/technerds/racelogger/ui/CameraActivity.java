@@ -51,8 +51,8 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
 
-import me.shaohui.advancedluban.Luban;
-import me.shaohui.advancedluban.OnCompressListener;
+// import me.shaohui.advancedluban.Luban;
+// import me.shaohui.advancedluban.OnCompressListener;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;

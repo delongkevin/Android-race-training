@@ -48,7 +48,7 @@ import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.Gson;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.technerds.racelogger.Utils.DateFormatter;
@@ -67,15 +67,15 @@ import com.technerds.racelogger.dataModels.editProfileModel.EditProfileModel;
 import com.technerds.racelogger.dataModels.getProfileModel.GetProfileModel;
 import com.technerds.racelogger.databinding.ActivityEditProfileBinding;
 import com.technerds.racelogger.ui.CameraActivity;
-import com.vikktorn.picker.City;
-import com.vikktorn.picker.CityPicker;
-import com.vikktorn.picker.Country;
-import com.vikktorn.picker.CountryPicker;
-import com.vikktorn.picker.OnCityPickerListener;
-import com.vikktorn.picker.OnCountryPickerListener;
-import com.vikktorn.picker.OnStatePickerListener;
-import com.vikktorn.picker.State;
-import com.vikktorn.picker.StatePicker;
+// import com.vikktorn.picker.City;
+// import com.vikktorn.picker.CityPicker;
+// import com.vikktorn.picker.Country;
+// import com.vikktorn.picker.CountryPicker;
+// import com.vikktorn.picker.OnCityPickerListener;
+// import com.vikktorn.picker.OnCountryPickerListener;
+// import com.vikktorn.picker.OnStatePickerListener;
+// import com.vikktorn.picker.State;
+// import com.vikktorn.picker.StatePicker;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -90,8 +90,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
-import me.shaohui.advancedluban.Luban;
-import me.shaohui.advancedluban.OnCompressListener;
+// import me.shaohui.advancedluban.Luban;
+// import me.shaohui.advancedluban.OnCompressListener;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -165,8 +165,16 @@ public class EditProfileActivity extends AppCompatActivity implements OnCompress
         calendar = Calendar.getInstance();
         TimeZone timeZone = TimeZone.getDefault();
         timeZoneS = timeZone.getID().toString();
-        fcm_token = FirebaseInstanceId.getInstance().getToken();
-        Log.wtf("-this", "FCM Token : " + fcm_token);
+        
+        // Get FCM token using new Firebase Messaging API
+        FirebaseMessaging.getInstance().getToken()
+            .addOnCompleteListener(task -> {
+                if (task.isSuccessful() && task.getResult() != null) {
+                    fcm_token = task.getResult();
+                    Log.wtf("-this", "FCM Token : " + fcm_token);
+                }
+            });
+        
         countryPickerInit();
         binding.spinnerGender.setItems("Male", "Female", "Other");
         binding.spinnerGender.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
